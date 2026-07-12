@@ -52,7 +52,7 @@ print(f"  icon: {isize//1024} KB")
 
 # Real pet photos — Cotton (dog, hero) and Ester (cat, about). The emotional anchor.
 PETS = pathlib.Path("/Users/kamkamolsirisakul/Documents/Kam Co Work OS/Projects/WAG LAB /pawma-app/mobile/assets/images")
-for key, fn, w in [("{{COTTON}}", "Cotton 1.jpeg", 720), ("{{ESTER}}", "Ester 5.jpg", 640)]:
+for key, fn, w in [("{{COTTON}}", "Cotton 1.jpeg", 720), ("{{COTTON2}}", "Cotton 2.jpeg", 640), ("{{ESTER}}", "Ester 5.jpg", 640)]:
     p = PETS / fn
     if p.exists():
         uri, size = webp_uri(p, w, quality=82)

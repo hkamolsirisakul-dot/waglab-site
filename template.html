@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Wag Lab Co — Better lives for pets</title>
+<meta name="description" content="The Wag Lab Co is a pet-care company. Our first app, Pawma, turns your vet visits and lab reports into one health record you actually own.">
+<link rel="icon" href="{{ICON}}">
+<meta property="og:title" content="The Wag Lab Co — Better lives for pets">
+<meta property="og:description" content="Our first app, Pawma, turns your vet visits and lab reports into one health record you actually own.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --ground: #f5f2ec; --panel: #ffffff; --raise: #fbfaf7;
+    --ink: #1b1613; --muted: #6d655d; --faint: #9b938a;
+    --line: #e7e1d8; --line-strong: #d8d1c5;
+    --orange: #f26b28; --orange-soft: #fbe6d8; --orange-ink: #b8471c;
+    --green: #1e3d2f; --green-soft: #e4ece7; --green-ink: #1e3d2f;
+    --teal: #2f7d8f; --teal-soft: #e0eef1;
+    --shadow-sm: 0 1px 2px rgba(27,22,19,.05), 0 4px 14px rgba(27,22,19,.05);
+    --shadow-lg: 0 4px 12px rgba(27,22,19,.06), 0 24px 60px rgba(27,22,19,.12);
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --maxw: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #14120f; --panel: #1f1c18; --raise: #1a1714;
+      --ink: #f3eee7; --muted: #a69e94; --faint: #7b746b;
+      --line: #2d2823; --line-strong: #3b352d;
+      --orange: #f5793a; --orange-soft: #3a2417; --orange-ink: #f7a072;
+      --green: #86c0a4; --green-soft: #1c2a24; --green-ink: #9fceb6;
+      --teal: #6fb9c9; --teal-soft: #17292e;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.3);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,.4), 0 24px 60px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #f5f2ec; --panel: #ffffff; --raise: #fbfaf7; --ink: #1b1613; --muted: #6d655d;
+    --faint: #9b938a; --line: #e7e1d8; --line-strong: #d8d1c5; --orange: #f26b28;
+    --orange-soft: #fbe6d8; --orange-ink: #b8471c; --green: #1e3d2f; --green-soft: #e4ece7;
+    --green-ink: #1e3d2f; --teal: #2f7d8f; --teal-soft: #e0eef1;
+    --shadow-sm: 0 1px 2px rgba(27,22,19,.05), 0 4px 14px rgba(27,22,19,.05);
+    --shadow-lg: 0 4px 12px rgba(27,22,19,.06), 0 24px 60px rgba(27,22,19,.12);
+  }
+  :root[data-theme="dark"] {
+    --ground: #14120f; --panel: #1f1c18; --raise: #1a1714; --ink: #f3eee7; --muted: #a69e94;
+    --faint: #7b746b; --line: #2d2823; --line-strong: #3b352d; --orange: #f5793a;
+    --orange-soft: #3a2417; --orange-ink: #f7a072; --green: #86c0a4; --green-soft: #1c2a24;
+    --green-ink: #9fceb6; --teal: #6fb9c9; --teal-soft: #17292e;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.3);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,.4), 0 24px 60px rgba(0,0,0,.5);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans);
+    line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* wordmarks */
+  .wm-co { font-weight: 700; letter-spacing: -.02em; font-size: 17px; color: var(--ink); }
+  .wm-co .lab { color: var(--green); }
+  .wm-paw { font-weight: 800; letter-spacing: -.03em; }
+  .wm-paw .d { color: var(--orange); }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  nav .links { display: flex; align-items: center; gap: 28px; }
+  nav .links a { font-size: 14.5px; color: var(--muted); font-weight: 500; }
+  nav .links a:hover { color: var(--ink); }
+  @media (max-width: 720px) { nav .links a.nav-hide { display: none; } }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14.5px;
+    border-radius: 999px; padding: 10px 18px; cursor: pointer; border: 1px solid transparent;
+    transition: transform .12s ease, background .15s ease; }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--orange); color: #fff; }
+  .btn-primary:hover { background: #e05e1f; }
+  :root[data-theme="dark"] .btn-primary, @media (prefers-color-scheme: dark) { }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn-ghost:hover { background: var(--raise); }
+
+  /* hero */
+  .hero { padding: 72px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 8px; } }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--green); background: var(--green-soft);
+    padding: 5px 12px; border-radius: 999px; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.03; letter-spacing: -.03em; font-weight: 800;
+    margin: 0 0 20px; text-wrap: balance; }
+  .hero h1 .accent { color: var(--orange); }
+  .hero .sub { font-size: clamp(16px, 2.3vw, 19px); color: var(--muted); max-width: 46ch; margin: 0 0 28px; }
+  .hero .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .hero .note { font-size: 13px; color: var(--faint); margin-top: 16px; }
+  .apple { width: 15px; height: 18px; fill: currentColor; }
+
+  /* phone frame */
+  .phone { position: relative; width: 280px; max-width: 78vw; margin: 0 auto; border-radius: 40px;
+    background: #0e0d0c; padding: 11px; box-shadow: var(--shadow-lg); }
+  .phone::before { content: ""; position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 108px; height: 26px; background: #0e0d0c; border-radius: 999px; z-index: 2; }
+  .phone img { border-radius: 30px; width: 100%; }
+  .hero .phone { transform: rotate(1.5deg); }
+
+  /* section scaffolding */
+  section { scroll-margin-top: 80px; }
+  .band { padding: 76px 0; }
+  .band + .band { border-top: 1px solid var(--line); }
+  .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    margin: 0 0 12px; }
+  .kicker.o { color: var(--orange); }
+  .kicker.g { color: var(--green); }
+  .kicker.t { color: var(--teal); }
+  h2 { font-size: clamp(26px, 4vw, 38px); line-height: 1.08; letter-spacing: -.02em; font-weight: 800;
+    margin: 0 0 16px; text-wrap: balance; }
+  .lead { font-size: 17px; color: var(--muted); max-width: 60ch; margin: 0; }
+  .lead b { color: var(--ink); font-weight: 600; }
+
+  /* feature rows */
+  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 56px; }
+  .feature:nth-child(even) .fig { order: 2; }
+  @media (max-width: 780px) { .feature { grid-template-columns: 1fr; gap: 20px; }
+    .feature .fig { order: -1 !important; } }
+  .feature .fig { display: flex; justify-content: center; }
+  .feature .fig .phone { width: 250px; }
+  .feature h3 { font-size: 23px; letter-spacing: -.02em; margin: 0 0 10px; font-weight: 700; }
+  .feature p { color: var(--muted); font-size: 16px; margin: 0 0 14px; max-width: 42ch; }
+  .tagpill { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600;
+    color: var(--orange-ink); background: var(--orange-soft); padding: 4px 11px; border-radius: 999px; }
+
+  /* bigger picture / flywheel */
+  .picture { background: var(--green); color: #f3efe7; }
+  :root[data-theme="dark"] .picture { background: #16241d; }
+  @media (prefers-color-scheme: dark) { .picture { background: #16241d; } }
+  :root[data-theme="light"] .picture { background: #1e3d2f; }
+  .picture .kicker { color: #9ccbb2; }
+  .picture h2 { color: #fbf7f0; }
+  .picture .lead { color: #c3d3ca; }
+  .picture .lead b { color: #fff; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 44px; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr 1fr; } }
+  .step { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px;
+    padding: 18px; }
+  .step .num { font-size: 12px; font-weight: 700; color: #9ccbb2; letter-spacing: .1em; }
+  .step .st { font-size: 16px; font-weight: 700; margin: 8px 0 5px; color: #fbf7f0; }
+  .step p { font-size: 13.5px; color: #b6c7bd; margin: 0; line-height: 1.45; }
+  .solset { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+  .sol { display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14); border-radius: 999px; padding: 8px 15px; font-size: 14px;
+    color: #eadfd3; }
+  .sol .badge { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 999px; }
+  .sol .badge.live { background: var(--orange); color: #fff; }
+  .sol .badge.soon { background: rgba(255,255,255,.16); color: #d8cabb; }
+
+  /* learn / community */
+  .learn-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; margin-top: 8px; }
+  @media (max-width: 820px) { .learn-grid { grid-template-columns: 1fr; } }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media (max-width: 480px) { .cards { grid-template-columns: 1fr; } }
+  .lcard { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px;
+    box-shadow: var(--shadow-sm); }
+  .lcard .h { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+  .lcard .p { font-size: 13.5px; color: var(--muted); }
+  .signup { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 26px;
+    box-shadow: var(--shadow-sm); }
+  .signup h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: -.01em; }
+  .signup p { margin: 0 0 16px; color: var(--muted); font-size: 14.5px; }
+  .field { display: flex; gap: 8px; }
+  .field input { flex: 1; min-width: 0; border: 1px solid var(--line-strong); background: var(--ground);
+    color: var(--ink); border-radius: 999px; padding: 11px 16px; font-size: 14.5px; font-family: inherit; }
+  .field input:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+  .partners { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 30px; }
+  .partners .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint);
+    font-weight: 600; }
+  .plogo { height: 34px; padding: 0 16px; display: inline-flex; align-items: center; border-radius: 8px;
+    background: var(--panel); border: 1px dashed var(--line-strong); color: var(--faint); font-size: 13px;
+    font-weight: 600; }
+
+  /* about */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; gap: 20px; } }
+  .about p { color: var(--muted); font-size: 16px; margin: 0 0 16px; }
+  .about p b { color: var(--ink); }
+  .stat-row { display: flex; gap: 28px; margin-top: 8px; flex-wrap: wrap; }
+  .stat .v { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+  .stat .l { font-size: 13px; color: var(--muted); }
+
+  /* footer */
+  footer { background: var(--raise); border-top: 1px solid var(--line); padding: 56px 0 40px; margin-top: 0; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
+  @media (max-width: 680px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+  .foot-brand p { color: var(--muted); font-size: 14px; max-width: 34ch; margin: 12px 0 0; }
+  .foot-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint);
+    margin: 0 0 14px; font-weight: 700; }
+  .foot-col a { display: block; font-size: 14.5px; color: var(--muted); margin-bottom: 10px; }
+  .foot-col a:hover { color: var(--ink); }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--faint); }
+
+  .disclaimer { font-size: 12.5px; color: var(--faint); max-width: 68ch; margin: 14px auto 0; text-align: center;
+    line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="wm-co">The Wag Lab <span class="lab">Co.</span></a>
+      <div class="links">
+        <a href="#pawma" class="nav-hide">Pawma</a>
+        <a href="#vision" class="nav-hide">What we're building</a>
+        <a href="#learn" class="nav-hide">Learn</a>
+        <a href="#about" class="nav-hide">About</a>
+        <a href="{{APPSTORE}}" class="btn btn-primary">Get Pawma</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow"><span>🐾</span> The Wag Lab Co.</span>
+        <h1>Better lives for pets, built on records they can&nbsp;<span class="accent">trust</span>.</h1>
+        <p class="sub">We're a pet-care company building the health backbone for every pet. Our first app, <b style="color:var(--ink);font-weight:600">Pawma</b>, turns your vet visits and lab reports into one health record you actually own.</p>
+        <div class="cta-row">
+          <a href="{{APPSTORE}}" class="btn btn-primary">
+            <svg class="apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            Get Pawma — free on iOS
+          </a>
+          <a href="#pawma" class="btn btn-ghost">See how it works</a>
+        </div>
+        <p class="note">iOS · Bangkok-first · Your data stays yours.</p>
+      </div>
+      <div class="hero-fig">
+        <div class="phone"><img src="{{SHOT_RECORD}}" alt="The Pawma app showing a dog's health record — vaccines, journal, and reminders" width="280"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAWMA -->
+  <section id="pawma" class="band">
+    <div class="wrap">
+      <p class="kicker o">The first product · Live on the App Store</p>
+      <h2>Meet Pawma — your pet's whole story, in one place.</h2>
+      <p class="lead">Vets hand you paper. Labs hand you numbers. Pawma turns all of it into a <b>single, owner-held record</b> — so you walk into every visit knowing exactly where your pet stands.</p>
+
+      <div class="feature">
+        <div class="fig"><div class="phone"><img src="{{SHOT_CAPTURE}}" alt="Snapping a lab report in Pawma" width="250"></div></div>
+        <div class="fbody">
+          <span class="tagpill">✨ Where the AI comes in</span>
+          <h3 style="margin-top:12px">Snap a lab report. It reads itself.</h3>
+          <p>Photograph a blood panel or a vet document and Pawma's AI structures it into the record — analyte by analyte, with the normal ranges — so nothing lives in a drawer or a lost line of chat.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="fig"><div class="phone"><img src="{{SHOT_RECORD}}" alt="A pet's record in Pawma" width="250"></div></div>
+        <div class="fbody">
+          <span class="tagpill">One record</span>
+          <h3 style="margin-top:12px">Visits, vaccines, labs & reminders — together.</h3>
+          <p>Every vaccination, every recommendation, every meal and symptom in one timeline. Pawma quietly tracks what's due next, so the rabies booster and the ALT recheck never slip.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="fig"><div class="phone"><img src="{{SHOT_SUMMARY}}" alt="A vet-ready summary in Pawma" width="250"></div></div>
+        <div class="fbody">
+          <span class="tagpill">Vet-ready</span>
+          <h3 style="margin-top:12px">A clear summary for every visit.</h3>
+          <p>One tap turns the record into a summary your vet can read in seconds — history, trends, and what's changed since last time. Less "I think it was a few months ago," more actual care.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:48px">
+        <a href="{{APPSTORE}}" class="btn btn-primary">
+          <svg class="apple" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          Download Pawma
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIGGER PICTURE -->
+  <section id="vision" class="band picture">
+    <div class="wrap">
+      <p class="kicker">The bigger picture</p>
+      <h2>Pawma is step one.</h2>
+      <p class="lead">The health record isn't just an app feature — it's the <b>platform</b>. Once a pet has a trusted record, everything else the lab builds can stand on it: food matched to real health data, services that know your pet's history. <b>One record, many solutions.</b></p>
+
+      <div class="steps">
+        <div class="step"><div class="num">01</div><div class="st">Earn trust</div><p>Guides & community, with partners pet owners already follow.</p></div>
+        <div class="step"><div class="num">02</div><div class="st">Own the record</div><p>Pawma turns visits & labs into a record you keep.</p></div>
+        <div class="step"><div class="num">03</div><div class="st">Grow value</div><p>Marketplace & services built on that record.</p></div>
+        <div class="step"><div class="num">04</div><div class="st">Compound</div><p>Real outcomes become the next story we tell.</p></div>
+      </div>
+
+      <div class="solset">
+        <span class="sol"><span class="badge live">Live</span> Pawma — the pet health record</span>
+        <span class="sol"><span class="badge soon">Next</span> Marketplace — food & products, matched to the record</span>
+        <span class="sol"><span class="badge soon">Later</span> Services — vet, longevity & more</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARN / COMMUNITY -->
+  <section id="learn" class="band">
+    <div class="wrap">
+      <div class="learn-grid">
+        <div>
+          <p class="kicker t">Learn & community</p>
+          <h2>Good pet care, made understandable.</h2>
+          <p class="lead">Plain-language guides and expert answers to the questions every owner Googles at 11pm — created with the vets, nutritionists, and creators pet owners already trust.</p>
+          <div class="cards">
+            <div class="lcard"><div class="h">Reading your dog's bloodwork</div><div class="p">What ALT, BUN, and the rest actually mean.</div></div>
+            <div class="lcard"><div class="h">The vaccine calendar</div><div class="p">What's due, and when, for dogs & cats in Thailand.</div></div>
+            <div class="lcard"><div class="h">Puppy's first year</div><div class="p">The visits and milestones that matter.</div></div>
+            <div class="lcard"><div class="h">Feeding by life stage</div><div class="p">How needs change from kitten to senior.</div></div>
+          </div>
+          <div class="partners">
+            <span class="lbl">In partnership with</span>
+            <span class="plogo">Partner clinic</span>
+            <span class="plogo">Pet nutritionist</span>
+            <span class="plogo">Your creator</span>
+          </div>
+        </div>
+        <div class="signup">
+          <h3>Join the pack.</h3>
+          <p>Practical pet-care notes, occasional and worth opening. No spam, ever.</p>
+          <form class="field" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.nextElementSibling.hidden=false;">
+            <input type="email" placeholder="you@email.com" aria-label="Email address" required>
+            <button class="btn btn-primary" type="submit">Join</button>
+          </form>
+          <p class="p" hidden style="margin-top:12px;color:var(--green)">Thanks — we'll be in touch. (Wire this to your email tool.)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="band">
+    <div class="wrap about">
+      <div class="about-grid">
+        <div>
+          <p class="kicker g">The lab</p>
+          <h2>Why we're building this.</h2>
+        </div>
+        <div>
+          <p>Pets are family — but their health lives in scattered paper, group chats, and memory. When it matters most, no one can find it.</p>
+          <p><b>The Wag Lab Co is a Bangkok-based pet-care company</b> on a simple bet: give every pet a health record its owner truly holds, and better care follows — for the pet, the vet, and everyone building to help them.</p>
+          <p>We started with Pawma. We're building the rest in the open, with the people who care for pets every day.</p>
+          <div class="stat-row">
+            <div class="stat"><div class="v">1</div><div class="l">app, live on iOS</div></div>
+            <div class="stat"><div class="v">🇹🇭</div><div class="l">Bangkok-first</div></div>
+            <div class="stat"><div class="v">∞</div><div class="l">pets to help</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="wm-co" style="font-size:18px">The Wag Lab <span class="lab">Co.</span></span>
+        <p>Better lives for pets, built on records they can trust. Pawma, by The Wag Lab Co.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Pawma</h4>
+        <a href="{{APPSTORE}}">Download on iOS</a>
+        <a href="#pawma">How it works</a>
+        <a href="#vision">What we're building</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#about">About</a>
+        <a href="#learn">Learn</a>
+        <a href="mailto:swagwithus@thewaglabco.com">Contact</a>
+        <a href="https://hkamolsirisakul-dot.github.io/pawma-legal/privacy.html">Privacy</a>
+        <a href="https://hkamolsirisakul-dot.github.io/pawma-legal/support.html">Support</a>
+      </div>
+    </div>
+    <p class="disclaimer">Pawma keeps a record of what your vet and documents recorded. It is not a diagnostic tool and does not provide medical advice — always consult your veterinarian.</p>
+    <div class="foot-bottom">
+      <span>© 2026 The Wag Lab Co. All rights reserved.</span>
+      <span>Made in Bangkok 🐾</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle honors the viewer's stamped preference; no-op otherwise.
+  (function(){
+    try {
+      var t = localStorage.getItem('waglab-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch(e){}
+  })();
+</script>
+</body>
+</html>

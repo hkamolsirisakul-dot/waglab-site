@@ -118,8 +118,11 @@
   .hero-pet { width: 340px; max-width: 84vw; margin: 0 auto; transform: rotate(1.5deg); }
   @media (max-width: 860px) { .hero-pet { margin-top: 16px; transform: rotate(1deg); } }
   .hero-pet img { aspect-ratio: 3 / 4; object-position: center 42%; }
-  .about-pet { width: 100%; max-width: 380px; margin-top: 22px; }
-  .about-pet img { aspect-ratio: 5 / 5; object-position: 50% 20%; }
+  .pet-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 430px; margin-top: 22px; }
+  .duo-pet img { aspect-ratio: 1 / 1; }
+  .duo-pet.cotton img { object-position: 50% 36%; }
+  .duo-pet.ester img { object-position: 50% 15%; }
+  .duo-pet figcaption { left: 10px; bottom: 10px; font-size: 12px; padding: 5px 10px; }
 
   /* section scaffolding */
   section { scroll-margin-top: 80px; }
@@ -379,10 +382,16 @@
         <div>
           <p class="kicker g">The lab</p>
           <h2>Why we're building this.</h2>
-          <figure class="petshot about-pet">
-            <img src="{{ESTER}}" alt="Ester, a bright-eyed tabby cat, sitting for the camera">
-            <figcaption>🐾 Ester</figcaption>
-          </figure>
+          <div class="pet-duo">
+            <figure class="petshot duo-pet cotton">
+              <img src="{{COTTON}}" alt="Cotton, a happy little Maltese">
+              <figcaption>🐾 Cotton</figcaption>
+            </figure>
+            <figure class="petshot duo-pet ester">
+              <img src="{{ESTER}}" alt="Ester, a bright-eyed tabby cat">
+              <figcaption>🐾 Ester</figcaption>
+            </figure>
+          </div>
         </div>
         <div>
           <p>Pets are family — but their health lives in scattered paper, group chats, and memory. When it matters most, no one can find it.</p>

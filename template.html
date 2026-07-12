@@ -102,9 +102,9 @@
   /* phone frame */
   .phone { position: relative; width: 280px; max-width: 78vw; margin: 0 auto; border-radius: 40px;
     background: #0e0d0c; padding: 11px; box-shadow: var(--shadow-lg); }
-  .phone::before { content: ""; position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-    width: 108px; height: 26px; background: #0e0d0c; border-radius: 999px; z-index: 2; }
-  .phone img { border-radius: 30px; width: 100%; }
+  /* No fake notch/island — the real App Store screenshots carry their own status bar,
+     and an overlay island covered the pet's name. Show everything, unobstructed. */
+  .phone img { border-radius: 30px; width: 100%; display: block; }
   .hero .phone { transform: rotate(1.5deg); }
 
   /* real pet photos — the emotional anchor */
@@ -189,6 +189,15 @@
   .field input { flex: 1; min-width: 0; border: 1px solid var(--line-strong); background: var(--ground);
     color: var(--ink); border-radius: 999px; padding: 11px 16px; font-size: 14.5px; font-family: inherit; }
   .field input:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+  .wl-form { display: flex; flex-direction: column; gap: 8px; }
+  .wl-form > input[name="name"] { border: 1px solid var(--line-strong); background: var(--ground);
+    color: var(--ink); border-radius: 999px; padding: 11px 16px; font-size: 14.5px; font-family: inherit; }
+  .wl-form > input[name="name"]:focus { outline: 2px solid var(--orange); outline-offset: 1px; }
+  .wl-form .field button { white-space: nowrap; }
+  .btn[disabled] { opacity: .55; pointer-events: none; }
+  .wl-msg { margin-top: 12px; font-size: 14px; line-height: 1.5; }
+  .wl-msg.ok { color: var(--green); font-weight: 600; }
+  .wl-msg.err { color: var(--orange-ink); }
   .partners { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 30px; }
   .partners .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint);
     font-weight: 600; }
@@ -232,7 +241,7 @@
         <a href="#vision" class="nav-hide">What we're building</a>
         <a href="#learn" class="nav-hide">Learn</a>
         <a href="#about" class="nav-hide">About</a>
-        <a href="#notify" class="btn btn-primary">Get notified</a>
+        <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
       </div>
     </nav>
   </div>
@@ -247,7 +256,7 @@
         <h1>Better lives for pets, built on records they can&nbsp;<span class="accent">trust</span>.</h1>
         <p class="sub">We're a pet-care company building the health backbone for every pet. Our first app, <b style="color:var(--ink);font-weight:600">Pawma</b>, turns your vet visits and lab reports into one health record you actually own.</p>
         <div class="cta-row">
-          <a href="#notify" class="btn btn-primary">Get notified when Pawma launches</a>
+          <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
           <a href="#pawma" class="btn btn-ghost">See how it works</a>
         </div>
         <p class="note">
@@ -299,7 +308,7 @@
       </div>
 
       <div style="margin-top:48px">
-        <a href="#notify" class="btn btn-primary">Get notified when it launches</a>
+        <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
       </div>
     </div>
   </section>
@@ -347,14 +356,17 @@
             <span class="plogo">Your creator</span>
           </div>
         </div>
-        <div class="signup" id="notify">
-          <h3>Be first to know.</h3>
-          <p>Pawma is launching soon. Leave your email and we'll tell you the moment it's live — plus occasional pet-care notes worth opening. No spam, ever.</p>
-          <form class="field" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.nextElementSibling.hidden=false;">
-            <input type="email" placeholder="you@email.com" aria-label="Email address" required>
-            <button class="btn btn-primary" type="submit">Notify me</button>
+        <div class="signup" id="waitlist">
+          <h3>Join the waitlist.</h3>
+          <p>Pawma is launching soon. Add your email and you'll be first in — we'll tell you the moment it's live. No spam, ever.</p>
+          <form class="wl-form" id="wlForm" novalidate>
+            <input type="text" name="name" placeholder="Your name (optional)" aria-label="Your name" autocomplete="name">
+            <div class="field">
+              <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" autocomplete="email" inputmode="email" required>
+              <button class="btn btn-primary" type="submit">Join the waitlist</button>
+            </div>
           </form>
-          <p class="p" hidden style="margin-top:12px;color:var(--green)">Thanks — we'll email you the moment Pawma's live. 🐾</p>
+          <p class="wl-msg" id="wlMsg" role="status" aria-live="polite" hidden></p>
         </div>
       </div>
     </div>
@@ -396,7 +408,7 @@
       </div>
       <div class="foot-col">
         <h4>Pawma</h4>
-        <a href="#notify">Get notified</a>
+        <a href="#waitlist">Join the waitlist</a>
         <a href="#pawma">How it works</a>
         <a href="#vision">What we're building</a>
       </div>
@@ -424,6 +436,40 @@
       var t = localStorage.getItem('waglab-theme');
       if (t) document.documentElement.setAttribute('data-theme', t);
     } catch(e){}
+  })();
+
+  // Waitlist → Google Sheet (via an Apps Script web app). Until the endpoint is
+  // wired, the form falls back to email so no signup is ever lost.
+  (function(){
+    var ENDPOINT = "__WAITLIST_ENDPOINT__";
+    var CONTACT = "swagwithus@thewaglabco.com";
+    var form = document.getElementById('wlForm');
+    if (!form) return;
+    var msg = document.getElementById('wlMsg');
+    var btn = form.querySelector('button[type="submit"]');
+    function show(text, cls){ msg.textContent = text; msg.className = 'wl-msg ' + cls; msg.hidden = false; }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var email = form.email.value.trim();
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        show('Please enter a valid email.', 'err'); form.email.focus(); return;
+      }
+      // Endpoint not configured yet — hand off to email so we never drop a signup.
+      if (ENDPOINT.indexOf('http') !== 0) {
+        window.location.href = 'mailto:' + CONTACT + '?subject=' +
+          encodeURIComponent('Join the Pawma waitlist') + '&body=' +
+          encodeURIComponent('Please add me to the waitlist:\n\nName: ' + form.name.value.trim() + '\nEmail: ' + email);
+        return;
+      }
+      var original = btn.textContent;
+      btn.textContent = 'Joining…'; btn.disabled = true;
+      var body = new URLSearchParams({ email: email, name: form.name.value.trim(), source: 'thewaglabco.com' });
+      fetch(ENDPOINT, { method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body: body.toString() })
+        .then(function(){ form.reset(); show("You're on the list — we'll email you the moment Pawma's live. 🐾", 'ok'); })
+        .catch(function(){ show('Hmm, that didn’t go through. Email ' + CONTACT + ' and we’ll add you.', 'err'); })
+        .finally(function(){ btn.textContent = original; btn.disabled = false; });
+    });
   })();
 </script>
 </body>

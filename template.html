@@ -149,6 +149,8 @@
   .feature p { color: var(--muted); font-size: 16px; margin: 0 0 14px; max-width: 42ch; }
   .tagpill { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600;
     color: var(--orange-ink); background: var(--orange-soft); padding: 4px 11px; border-radius: 999px; }
+  .app-icon { width: 64px; height: 64px; border-radius: 15px; display: block; margin-bottom: 18px;
+    box-shadow: var(--shadow-sm); }
 
   /* bigger picture / flywheel */
   .picture { background: var(--green); color: #f3efe7; }
@@ -280,12 +282,13 @@
   <!-- PAWMA -->
   <section id="pawma" class="band">
     <div class="wrap">
+      <img class="app-icon" src="{{ICON}}" alt="Pawma app icon" width="64" height="64">
       <p class="kicker o">The first product · Coming soon to iOS</p>
       <h2>Meet Pawma — your pet's whole story, in one place.</h2>
       <p class="lead">Vets hand you paper. Labs hand you numbers. Pawma turns all of it into a <b>single, owner-held record</b> — so you walk into every visit knowing exactly where your pet stands.</p>
 
       <div class="feature">
-        <div class="fig"><div class="phone"><img src="{{SHOT_CAPTURE}}" alt="Snapping a lab report in Pawma" width="250"></div></div>
+        <div class="fig"><div class="phone"><img src="{{SHOT_LABS}}" alt="Pawma showing structured lab results, vaccinations, and reminders" width="250"></div></div>
         <div class="fbody">
           <span class="tagpill">✨ Where the AI comes in</span>
           <h3 style="margin-top:12px">Snap a lab report. It reads itself.</h3>
@@ -326,9 +329,9 @@
           <h2>Good pet care, made understandable.</h2>
           <p class="lead">Plain-language guides and expert answers to the questions every owner Googles at 11pm — created with the vets, nutritionists, and creators pet owners already trust.</p>
           <div class="cards">
-            <div class="lcard"><div class="h">Reading your dog's bloodwork</div><div class="p">What ALT, BUN, and the rest actually mean.</div></div>
+            <div class="lcard"><div class="h">Reading your pet's bloodwork</div><div class="p">What ALT, BUN, and the rest actually mean.</div></div>
             <div class="lcard"><div class="h">The vaccine calendar</div><div class="p">What's due, and when, for dogs & cats in Thailand.</div></div>
-            <div class="lcard"><div class="h">Puppy's first year</div><div class="p">The visits and milestones that matter.</div></div>
+            <div class="lcard"><div class="h">Your pet's first year</div><div class="p">The visits and milestones that matter.</div></div>
             <div class="lcard"><div class="h">Feeding by life stage</div><div class="p">How needs change from kitten to senior.</div></div>
           </div>
           <div class="partners">

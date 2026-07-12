@@ -29,7 +29,7 @@ repl = {"{{APPSTORE}}": APPSTORE}
 total = 0
 mapping = {
     "{{SHOT_RECORD}}":  ("02-pet-record-cotton.png", 560),   # pet name repainted Mochi → Cotton (real dog)
-    "{{SHOT_CAPTURE}}": ("05-capture.png", 560),
+    "{{SHOT_CAPTURE}}": ("05-capture-trim.png", 560),   # empty bottom trimmed so the screen fills the frame
     "{{SHOT_SUMMARY}}": ("04-vet-summary-cotton.png", 560),  # pet name repainted Mochi → Cotton
     "{{SHOT_LABS}}":    ("03-vaccinations-labs.png", 560),
     "{{SHOT_HOME}}":    ("01-home.png", 560),

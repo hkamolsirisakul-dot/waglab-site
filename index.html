@@ -210,7 +210,9 @@
 
   /* about */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; gap: 20px; } }
+  .about-grid > div:last-child { margin-top: 46px; }
+  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; gap: 20px; }
+    .about-grid > div:last-child { margin-top: 0; } }
   .about p { color: var(--muted); font-size: 16px; margin: 0 0 16px; }
   .about p b { color: var(--ink); }
   .stat-row { display: flex; gap: 28px; margin-top: 8px; flex-wrap: wrap; }

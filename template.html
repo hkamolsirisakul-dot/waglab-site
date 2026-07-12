@@ -107,6 +107,20 @@
   .phone img { border-radius: 30px; width: 100%; }
   .hero .phone { transform: rotate(1.5deg); }
 
+  /* real pet photos — the emotional anchor */
+  .petshot { position: relative; margin: 0; border-radius: 28px; overflow: hidden;
+    box-shadow: var(--shadow-lg); background: var(--raise); }
+  .petshot img { width: 100%; display: block; object-fit: cover; }
+  .petshot figcaption { position: absolute; left: 14px; bottom: 14px;
+    background: color-mix(in srgb, var(--panel) 80%, transparent); backdrop-filter: blur(8px);
+    color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: -.01em;
+    padding: 6px 13px; border-radius: 999px; box-shadow: var(--shadow-sm); }
+  .hero-pet { width: 340px; max-width: 84vw; margin: 0 auto; transform: rotate(1.5deg); }
+  @media (max-width: 860px) { .hero-pet { margin-top: 16px; transform: rotate(1deg); } }
+  .hero-pet img { aspect-ratio: 3 / 4; object-position: center 42%; }
+  .about-pet { width: 100%; max-width: 380px; margin-top: 22px; }
+  .about-pet img { aspect-ratio: 5 / 5; object-position: 50% 20%; }
+
   /* section scaffolding */
   section { scroll-margin-top: 80px; }
   .band { padding: 76px 0; }
@@ -242,7 +256,10 @@
         </p>
       </div>
       <div class="hero-fig">
-        <div class="phone"><img src="{{SHOT_RECORD}}" alt="The Pawma app showing a dog's health record — vaccines, journal, and reminders" width="280"></div>
+        <figure class="petshot hero-pet">
+          <img src="{{COTTON}}" alt="Cotton, a happy little Maltese, ears up and tongue out">
+          <figcaption>🐾 Cotton</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -350,11 +367,15 @@
         <div>
           <p class="kicker g">The lab</p>
           <h2>Why we're building this.</h2>
+          <figure class="petshot about-pet">
+            <img src="{{ESTER}}" alt="Ester, a bright-eyed tabby cat, sitting for the camera">
+            <figcaption>🐾 Ester</figcaption>
+          </figure>
         </div>
         <div>
           <p>Pets are family — but their health lives in scattered paper, group chats, and memory. When it matters most, no one can find it.</p>
           <p><b>The Wag Lab Co is a Bangkok-based pet-care company</b> on a simple bet: give every pet a health record its owner truly holds, and better care follows — for the pet, the vet, and everyone building to help them.</p>
-          <p>We started with Pawma. We're building the rest in the open, with the people who care for pets every day.</p>
+          <p>We started with our own — <b>Cotton</b> and <b>Ester</b>, and the pile of vet visits and lab reports that came with loving them. Pawma is the record we wished we'd had. We're building the rest in the open, with the people who care for pets every day.</p>
           <div class="stat-row">
             <div class="stat"><div class="v">1</div><div class="l">app, coming to iOS</div></div>
             <div class="stat"><div class="v">🇹🇭</div><div class="l">Bangkok-first</div></div>

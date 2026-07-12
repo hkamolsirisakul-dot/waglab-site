@@ -50,6 +50,19 @@ repl["{{ICON}}"] = icon_uri
 total += isize
 print(f"  icon: {isize//1024} KB")
 
+# Real pet photos — Cotton (dog, hero) and Ester (cat, about). The emotional anchor.
+PETS = pathlib.Path("/Users/kamkamolsirisakul/Documents/Kam Co Work OS/Projects/WAG LAB /pawma-app/mobile/assets/images")
+for key, fn, w in [("{{COTTON}}", "Cotton 1.jpeg", 720), ("{{ESTER}}", "Ester 5.jpg", 640)]:
+    p = PETS / fn
+    if p.exists():
+        uri, size = webp_uri(p, w, quality=82)
+        repl[key] = uri
+        total += size
+        print(f"  {fn}: {size//1024} KB")
+    else:
+        repl[key] = ""
+        print(f"  !! missing {fn}")
+
 html = (HERE / "template.html").read_text()
 for k, v in repl.items():
     html = html.replace(k, v)

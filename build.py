@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
-"""Inline compressed screenshots into template.html -> index.html (one portable file)."""
+"""Inline images from ./assets into template.html -> index.html (one portable file).
+
+Source pet photos + app screenshots + the Pawma icon live in ./assets (committed to
+the repo). The favicon (assets/pawma-icon.png) and social card (og-image.jpg) are
+referenced as static files, not inlined, because og:image must be a real URL.
+"""
 import base64, io, pathlib
 from PIL import Image
 
 HERE = pathlib.Path(__file__).parent
-SHOTS = pathlib.Path("/Users/kamkamolsirisakul/Documents/Kam Co Work OS/Projects/WAG LAB /pawma-app/mobile/store-assets/ios-6.9")
-ICON = pathlib.Path("/Users/kamkamolsirisakul/Documents/Kam Co Work OS/Projects/WAG LAB /pawma-app/mobile/assets/images/icon.png")
-APPSTORE = "https://apps.apple.com/app/id6782536067"
+ASSETS = HERE / "assets"
 
-def webp_uri(path, width, quality=80):
-    im = Image.open(path).convert("RGB")
-    if im.width > width:
-        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
-    buf = io.BytesIO()
-    im.save(buf, format="WEBP", quality=quality, method=6)
-    b64 = base64.b64encode(buf.getvalue()).decode()
-    return f"data:image/webp;base64,{b64}", len(buf.getvalue())
+def webp_bytes_uri(path):
+    """Inline an already-optimized .webp file verbatim (no re-encode)."""
+    b = path.read_bytes()
+    return f"data:image/webp;base64,{base64.b64encode(b).decode()}", len(b)
 
-def png_uri(path, width):
+def png_to_webp_uri(path, width):
     im = Image.open(path).convert("RGBA")
     if im.width > width:
         im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
@@ -25,43 +24,31 @@ def png_uri(path, width):
     im.save(buf, format="WEBP", quality=90, method=6)
     return f"data:image/webp;base64,{base64.b64encode(buf.getvalue()).decode()}", len(buf.getvalue())
 
-repl = {"{{APPSTORE}}": APPSTORE}
+repl = {}
 total = 0
-mapping = {
-    "{{SHOT_RECORD}}":  ("02-pet-record-cotton.png", 560),   # pet name repainted Mochi → Cotton (real dog)
-    "{{SHOT_CAPTURE}}": ("05-capture-trim.png", 560),   # empty bottom trimmed so the screen fills the frame
-    "{{SHOT_SUMMARY}}": ("04-vet-summary-cotton.png", 560),  # pet name repainted Mochi → Cotton
-    "{{SHOT_LABS}}":    ("03-vaccinations-labs.png", 560),
-    "{{SHOT_HOME}}":    ("01-home.png", 560),
-}
-for key, (fn, w) in mapping.items():
-    p = SHOTS / fn
+
+# Photos + screenshots: already-optimized webp, inline verbatim.
+for key, fn in [
+    ("{{HERO_COTTON}}",  "hero-cotton.webp"),
+    ("{{SHOT_RECORD}}",  "shot-record.webp"),
+    ("{{SHOT_SUMMARY}}", "shot-summary.webp"),
+    ("{{ABOUT_COTTON}}", "about-cotton.webp"),
+    ("{{ABOUT_ESTHER}}", "about-ester.webp"),
+]:
+    p = ASSETS / fn
     if p.exists():
-        uri, size = webp_uri(p, w)
-        repl[key] = uri
-        total += size
+        uri, size = webp_bytes_uri(p); repl[key] = uri; total += size
         print(f"  {fn}: {size//1024} KB")
     else:
-        repl[key] = ""
-        print(f"  !! missing {fn}")
+        repl[key] = ""; print(f"  !! missing {fn}")
 
-icon_uri, isize = png_uri(ICON, 96)
-repl["{{ICON}}"] = icon_uri
-total += isize
-print(f"  icon: {isize//1024} KB")
-
-# Real pet photos — Cotton (dog, hero) and Ester (cat, about). The emotional anchor.
-PETS = pathlib.Path("/Users/kamkamolsirisakul/Documents/Kam Co Work OS/Projects/WAG LAB /pawma-app/mobile/assets/images")
-for key, fn, w in [("{{COTTON}}", "Cotton 1.jpeg", 720), ("{{COTTON2}}", "Cotton 2.jpeg", 640), ("{{ESTER}}", "Ester 5.jpg", 640)]:
-    p = PETS / fn
-    if p.exists():
-        uri, size = webp_uri(p, w, quality=82)
-        repl[key] = uri
-        total += size
-        print(f"  {fn}: {size//1024} KB")
-    else:
-        repl[key] = ""
-        print(f"  !! missing {fn}")
+# Pawma app icon: downscale the 1024px master to a crisp 128px webp.
+icon = ASSETS / "pawma-icon.png"
+if icon.exists():
+    uri, size = png_to_webp_uri(icon, 128); repl["{{PAWMA_ICON}}"] = uri; total += size
+    print(f"  pawma-icon: {size//1024} KB")
+else:
+    repl["{{PAWMA_ICON}}"] = ""; print("  !! missing pawma-icon.png")
 
 html = (HERE / "template.html").read_text()
 for k, v in repl.items():
@@ -69,5 +56,5 @@ for k, v in repl.items():
 
 out = HERE / "index.html"
 out.write_text(html)
-print(f"\nTotal image payload: {total//1024} KB")
+print(f"\nTotal inlined image payload: {total//1024} KB")
 print(f"Final index.html: {len(html.encode())//1024} KB -> {out}")

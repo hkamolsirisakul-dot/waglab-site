@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Wag Lab Co · Better lives for pets</title>
-<meta name="description" content="The Wag Lab Co is a pet-care company. Our first product, Pawma, turns your vet visits and lab reports into one health record you actually own. Coming soon to iOS & Android.">
+<meta name="description" content="The Wag Lab Co is a pet-care company. Our first product, Pawma, turns your vet visits and lab reports into one health record you actually own. Available on the App Store.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:title" content="The Wag Lab Co · Better lives for pets">
-<meta property="og:description" content="Pawma turns your vet visits and lab reports into one health record you actually own. Coming soon to iOS & Android.">
+<meta property="og:description" content="Pawma turns your vet visits and lab reports into one health record you actually own. Available on the App Store.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://thewaglabco.com">
 <meta property="og:image" content="https://thewaglabco.com/og-image.jpg">
@@ -143,21 +143,8 @@
   .card .h { font-weight:700; font-size:15.5px; }
   .card .p { font-size:14px; color:var(--muted); margin-top:6px; }
 
-  /* waitlist */
-  .waitlist { background:var(--forest-soft); text-align:center; }
-  .waitlist h2 { }
-  .waitlist p { color:#4E5A50; font-size:17px; margin:14px auto 0; max-width:52ch; }
-  .wl-form { display:flex; flex-direction:column; gap:10px; width:min(100%,520px); margin:28px auto 0; }
-  .wl-form input { width:100%; height:52px; padding:0 18px; background:var(--panel);
-    border:1px solid var(--line-strong); border-radius:999px; font-family:inherit; font-size:15px; color:var(--ink); }
-  .wl-form input::placeholder { color:var(--faint); }
-  .wl-form input:focus { outline:2px solid var(--forest); outline-offset:1px; }
-  .wl-row { display:flex; gap:10px; }
-  .wl-row input { flex:1; min-width:0; }
-  .wl-row .btn { height:52px; }
-  .btn[disabled] { opacity:.55; pointer-events:none; }
-  .wl-msg { margin-top:14px; font-size:14.5px; font-weight:600; }
-  .wl-msg.ok { color:var(--forest); } .wl-msg.err { color:#B4462F; }
+  .download { background:var(--forest-soft); text-align:center; }
+  .download .btn { margin-top:24px; }
 
   /* mission (the one dark moment) */
   .mission { background:#15251C; color:#EEEDE7; border-top:none; }
@@ -201,7 +188,7 @@
         <a href="#pawma" class="nav-hide">Pawma</a>
         <a href="#learn" class="nav-hide">Learn</a>
         <a href="#about" class="nav-hide">About</a>
-        <a href="#waitlist" class="btn btn-outline">Join the waitlist</a>
+        <a href="https://apps.apple.com/us/app/pawma/id6782536067" class="btn btn-outline">Get Pawma</a>
       </div>
     </nav>
   </div>
@@ -216,7 +203,7 @@
         <h1>Better lives for pets, built on records they can&nbsp;<span class="accent">trust.</span></h1>
         <p class="sub">We're a pet-care company building the health backbone for every pet. Our first app, <b>Pawma</b>, turns your vet visits and lab reports into one health record you actually own.</p>
         <div class="cta-row">
-          <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
+          <a href="https://apps.apple.com/us/app/pawma/id6782536067" class="btn btn-primary">Download on the App Store</a>
           <a href="#pawma" class="btn-link">See how it works
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -224,7 +211,7 @@
         <div class="app-lockup">
           <img src="data:image/webp;base64,UklGRu4DAABXRUJQVlA4IOIDAAAwGgCdASqAAIAAPjEYikOiIaEUCwRAIAMEsYBrcQg/K/wz2P7rn44dGLwV3vw/LmA7T3iL/1X+AdYDzAfqr+1XCAf2bqJ/1u6cr2IP2s/Y72hcwA6vVeB/e+EHaZ/u++AwA0kGMTzvv9PzK/O36/fAL+q/+39VXzAPZa/aMi0eQgZCfQeoQMF2zlNcVrR891vMCC4J4g08gUwuazqXhLOu2I5kD3ZkNexnNEZJM8t7XVM8f9HBMmcxnRGcSmzSH/Qh6wI5vTrrQugv7gcjqcj2qv+hSkrcRr4/QAD+6Wj/7vXZ+uzr2q0vxlTxlTh/AA1NaE0WlR4oR0ozHxmDwTmAef4t/Vr4JudPq+mr4xrrpWOMjQHRzn45iKqjQ52IXtTuDryCg09xpt5EM1R0l6WNS26szhcgZ/Nci2H/Ooo50/KQvnIiu7c8uAR3YmGvqyeugxMPRsfakdlDF1flX4vXL50Q+isq6Hi6pe++uWZ0k2d2GHzanLGqus1bA1LIedEXC2evsE90XX2X7WcRt9WlSNm+nIaDexdFHx3108071YpZH9YLZekPH+JSZgBtoA/9kR/6VjRDvwt0TYVJUDNmjdvqNmHTgCkZrefYJP8nPhdlw6HG4csnjWVVSXMAP9yDxaRpTe9yVOb5Z3SGEVeDGSe0sFU6sFoMPfgMpquAKGmevhnJslX213XJiUw9OT/tRv9Wx6hxX0hhhsZ5Zxdd1iLMVQZkGi8jFiX/1x63V+ESAlRVoBu8cB/vJciF27ytop5uERXKGraWSNVqLLSPJwsUJ76Wz0wvogCbCEaVCaioJ7I3B9u+BmD5OqmzWnaQPF415qipJkz/XcavRAyoa8vlNqYJ1+3v3ZrHCwOJaM44/+3kSobjuh1VWK8M/h3W9+xBcv3+N53ieYiS+LSuxx8c/lnlbijg18WU9mrsaTgBHZ9ZpVeH6X4aiksvASNX/7O33/0CN/8Hmdf5GeiARc9Ii59u7HVIy1VxfBnnTd6jyLqhKrM5b1JW/xIRIGVwQu3fg2BGBurybx3PQ5cS7uZM5tu866hNp6efGRaAOLLqluYcKgtuI+8lLkNavnsU35LYP+ncs3+5LVrVBIMJC/mdZVkt73brCe8oTbFP+ZBJj3fzOZE67KOE2LUoAgIRmc7EtIrh0p/d3hLElI/Jlt8n3d9XGUCMDlr1CJd/o2k7jXmTvPJh+Vxehyg/Hbvm6GmGqpy/q+j49Pe52iKfgjH0VbR0bxsnTg+sFbfQK0Lq17Banuh2MA9SbZifHuYoAniJ6XPO7gtbh9qpA8EUbt/KXYN07uSW3YjUtEgAAAAA" alt="Pawma app icon" width="44" height="44">
           <div>
-            <div class="l1">Pawma<span class="dot">.</span> <span class="soon">Coming soon to iOS &amp; Android</span></div>
+            <div class="l1">Pawma<span class="dot">.</span> <span class="soon">Available on the App Store</span></div>
             <div class="l2">Your data stays yours.</div>
           </div>
         </div>
@@ -246,7 +233,7 @@
         <div class="pawma-word">Pawma<span class="dot">.</span></div>
         <div class="endorse">The first product from The Wag Lab Co</div>
       </div>
-      <p class="kicker">Coming soon to iOS &amp; Android</p>
+      <p class="kicker">Available on the App Store</p>
       <h2>Their whole health story, in one place.</h2>
       <p class="lead">Vets hand you paper. Labs hand you numbers. Pawma turns all of it into a <b>single, owner-held record</b>, so you walk into every visit knowing exactly where your pet stands.</p>
 
@@ -296,19 +283,10 @@
     </div>
   </section>
 
-  <!-- WAITLIST -->
-  <section id="waitlist" class="band waitlist">
+  <section id="download" class="band download">
     <div class="wrap">
-      <h2>Be first in line for Pawma.</h2>
-      <p>Pawma is launching soon. Add your email and we'll tell you the moment it's live. No spam, ever.</p>
-      <form class="wl-form" id="wlForm" novalidate>
-        <input type="text" name="name" placeholder="Your name (optional)" aria-label="Your name" autocomplete="name">
-        <div class="wl-row">
-          <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" autocomplete="email" inputmode="email" required>
-          <button class="btn btn-primary" type="submit">Join the waitlist</button>
-        </div>
-      </form>
-      <p class="wl-msg" id="wlMsg" role="status" aria-live="polite" hidden></p>
+      <h2>Keep your pet’s health record with you.</h2>
+      <a href="https://apps.apple.com/us/app/pawma/id6782536067" class="btn btn-primary">Download on the App Store</a>
     </div>
   </section>
 
@@ -335,7 +313,7 @@
         <p>We started with our own, <b>Cotton</b> and <b>Esther</b>, and the pile of vet visits and lab reports that came with loving them. Pawma is the record we wished we'd had.</p>
         <p class="accent-line">Pawma is our first product. It won't be our last. The Wag Lab Co is building a family of tools for pet health.</p>
         <div class="stats">
-          <div class="stat"><div class="v">1</div><div class="l">app, coming to iOS &amp; Android</div></div>
+          <div class="stat"><div class="v">1</div><div class="l">app on the App Store</div></div>
           <div class="stat"><div class="v h">∞</div><div class="l">pets to help</div></div>
           <div class="stat"><div class="v">100%</div><div class="l">owner-held data</div></div>
         </div>
@@ -353,7 +331,7 @@
       </div>
       <div class="foot-col">
         <h4>Pawma</h4>
-        <a href="#waitlist">Join the waitlist</a>
+        <a href="https://apps.apple.com/us/app/pawma/id6782536067">Download on the App Store</a>
         <a href="#pawma">How it works</a>
       </div>
       <div class="foot-col">
@@ -373,34 +351,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-  // Waitlist → Google Sheet (Apps Script web app). Verified endpoint; keep in sync with the sheet.
-  (function(){
-    var ENDPOINT = "https://script.google.com/macros/s/AKfycbxh-2PQjlOL3kmrHddDbPyOrAeSVRB7yYn-d3zrY7LQBNiQ1uMmHZKpeZ1rHo33smr4/exec";
-    var CONTACT = "swagwithus@thewaglabco.com";
-    var form = document.getElementById('wlForm');
-    if (!form) return;
-    var msg = document.getElementById('wlMsg');
-    var btn = form.querySelector('button[type="submit"]');
-    function show(text, cls){ msg.textContent = text; msg.className = 'wl-msg ' + cls; msg.hidden = false; }
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var email = form.email.value.trim();
-      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        show('Please enter a valid email.', 'err'); form.email.focus(); return;
-      }
-      var original = btn.textContent;
-      btn.textContent = 'Joining…'; btn.disabled = true;
-      var body = new URLSearchParams({ email: email, name: form.name.value.trim(), source: 'thewaglabco.com' });
-      fetch(ENDPOINT, { method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body: body.toString() })
-        .then(function(){ form.reset(); show("You're on the list. We'll email you the moment Pawma's live. 🐾", 'ok'); })
-        .catch(function(){ show('Hmm, that didn’t go through. Email ' + CONTACT + ' and we’ll add you.', 'err'); })
-        .finally(function(){ btn.textContent = original; btn.disabled = false; });
-    });
-  })();
-</script>
 
 <!-- Cloudflare Web Analytics (cookieless, no consent banner needed) -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "592f860905d1418e8c12e096ade2117f"}'></script>
